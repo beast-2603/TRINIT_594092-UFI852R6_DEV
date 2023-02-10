@@ -1,11 +1,11 @@
-import React from 'react'
-import MenuNav from "../Components/MenuNav"
+import React from "react";
+import MenuNav from "../components/MenuNav";
 const Menu = () => {
   return (
     <div>
-       <MenuNav />
+      <MenuNav />
     </div>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;

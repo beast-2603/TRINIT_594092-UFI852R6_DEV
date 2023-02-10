@@ -5,7 +5,6 @@ const LINKS =[
     {to:"/Contact",text:"Contact"},
     {to:"/Service",text:"Service"},
     {to:"/Profile",text:"Profile"}
- 
 
 ]
 
@@ -14,9 +13,9 @@ const MenuNav = () => {
     <div>
         <ul>
             {
-                LINKS.map(item=>(   <li key={item.to}>
+                LINKS.map(item=>   <li key={item.to}>
                     <Link to={item.to}>{item.text}</Link>
-                        </li>))
+                        </li>)
             }
          
         </ul>
