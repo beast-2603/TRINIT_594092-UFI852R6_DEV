@@ -1,6 +1,5 @@
 import React from "react";
-import "./Styles/root.scss";
-
+import "./root.scss";
 import { Routes, Route } from "react-router-dom";
 import Cart from "./pages/Cart";
 import Menu from "./pages/Menu";
