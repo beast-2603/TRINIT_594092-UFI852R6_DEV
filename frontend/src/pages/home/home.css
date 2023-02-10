@@ -1,0 +1,51 @@
+.home_container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  background-color: #eeeeee;
+}
+.home_left {
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(#020017, #160266, #020017);
+  border: 20px solid #020017;
+  border-radius: 0 30px 30px 0;
+}
+/* use the logo  */
+.main_logo {
+  height: 20px;
+  width: 20px;
+  background-color: aqua;
+  position: fixed;
+  left: 20px;
+  top: 20px;
+}
+.home_left_bg {
+  width: 100%;
+  height: 100%;
+  background: url("../../../public/images/home_bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 38px;
+}
+.home_left img {
+  width: 100%;
+  height: 100%;
+}
+.home_right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.landing_para {
+  padding: 70px;
+}
+.landing_para h2 {
+  margin-bottom: 10px;
+}
+.landing_para p {
+  color: #666;
+}
