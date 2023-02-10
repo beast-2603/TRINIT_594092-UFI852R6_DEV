@@ -5,11 +5,11 @@ const Home = () => {
   return (
     <div className="home_container">
       <div className="home_left">
-        <div className="main_logo">{/* The logo goes here  */}</div>
+        {/* <div className="main_logo"></div> */}
         <div className="home_left_bg"></div>
       </div>
       <div className="home_right">
-        <NavBar />
+        {/* <NavBar /> */}
         <div className="landing_para">
           <h2>Welcome</h2>
           <p>
