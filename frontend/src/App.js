@@ -1,13 +1,13 @@
 import React from "react";
 import "./root.scss";
 import { Routes, Route } from "react-router-dom";
-import Cart from "./pages/Cart";
-import Menu from "./pages/Menu";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Service from "./pages/Service";
-import Profile from "./pages/Profile";
+import Cart from "./Pages/Cart";
+import Menu from "./Pages/Menu";
+import Home from "./Pages/Home";
+import About from "./Pages/About";
+import Contact from "./Pages/Contact";
+import Service from "./Pages/Service";
+import Profile from "./Pages/Profile";
 
 const App = () => {
   return (
