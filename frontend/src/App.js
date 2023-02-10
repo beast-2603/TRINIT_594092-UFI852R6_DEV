@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import "./root.scss";
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -9,6 +10,7 @@ import Contact from "./Pages/Contact";
 import Service from "./Pages/Service";
 import Profile from "./Pages/Profile";
 import NavBar from "./Components/NavBar";
+
 
 const App = () => {
   const location = useLocation();
