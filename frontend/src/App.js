@@ -4,7 +4,7 @@ import "./Styles/root.scss";
 import { Routes, Route } from "react-router-dom";
 import Cart from "./pages/Cart";
 import Menu from "./pages/Menu";
-import Home from "./pages/home/Home";
+import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Service from "./pages/Service";
