@@ -1,5 +1,5 @@
-import React from "react";
-import MenuNav from "../components/MenuNav";
+import React from 'react';
+import MenuNav from '../Components/MenuNav';
 const Menu = () => {
   return (
     <div>
