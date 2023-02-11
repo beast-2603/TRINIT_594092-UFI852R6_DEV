@@ -9,17 +9,13 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { TextField } from "@mui/material";
-import axios from "axios";
-
-const theme = createTheme();
 
 export default function SignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    event.preventDefault();
+    console.log(data.get("remember") ? true : false);
     const user = {
       name: data.get("name"),
       email: data.get("email"),
@@ -27,15 +23,23 @@ export default function SignUp() {
       district: data.get("district"),
       state: data.get("state"),
       password: data.get("password"),
-      saveuser: false,
+      saveuser: data.get("remember") ? true : false,
     };
     try {
-      const response = await axios.post(
-        "http://localhost:7000/user/signup",
-        user
-      );
-      const userdata = response.data;
-      console.log(userdata);
+      // const response = await axios.post(
+      //   "http://localhost:7000/user/signup",
+      //   user
+      // );
+      // const userdata = response.data;
+      const response = await fetch("http://localhost:7000/user/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      const userdata = await response.json();
+      console.log("userdata", userdata);
     } catch (error) {
       console.log("error during signing up", error);
     }
@@ -65,6 +69,7 @@ export default function SignUp() {
           flexDirection: "column",
           alignItems: "center",
           mt: "10vh",
+          pb: "3vh",
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -137,6 +142,7 @@ export default function SignUp() {
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
+            name="remember"
           />
           <Button
             type="submit"
@@ -144,7 +150,7 @@ export default function SignUp() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            Sign Up
           </Button>
           <Grid container>
             <Grid item>
