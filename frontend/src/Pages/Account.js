@@ -11,7 +11,12 @@ const theme = createTheme();
 export default function Account() {
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: "100vh", width: "100vw" }}>
+      <Grid
+        container
+        component="main"
+        sx={{ height: "100vh", width: "100vw", bgcolor: "#eee" }}
+        className="sign_container"
+      >
         <CssBaseline />
         <Grid
           item

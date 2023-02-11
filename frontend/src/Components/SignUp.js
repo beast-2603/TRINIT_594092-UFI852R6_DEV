@@ -11,17 +11,34 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { TextField } from "@mui/material";
+import axios from "axios";
 
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    event.preventDefault();
+    const user = {
+      name: data.get("name"),
       email: data.get("email"),
+      town: data.get("town"),
+      district: data.get("district"),
+      state: data.get("state"),
       password: data.get("password"),
-    });
+      saveuser: false,
+    };
+    try {
+      const response = await axios.post(
+        "http://localhost:7000/user/signup",
+        user
+      );
+      const userdata = response.data;
+      console.log(userdata);
+    } catch (error) {
+      console.log("error during signing up", error);
+    }
   };
 
   return (
@@ -34,14 +51,20 @@ export default function SignUp() {
       elevation={6}
       square
       className="signin_right_form"
+      style={{
+        boxShadow: "none",
+        backgroundColor: "#eee",
+        marginTop: "10vh",
+        overflow: "scroll",
+      }}
     >
       <Box
         sx={{
-          my: 8,
           mx: 4,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          mt: "10vh",
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -75,10 +98,30 @@ export default function SignUp() {
             margin="normal"
             required
             fullWidth
-            id="address"
-            label="Address"
-            name="address"
-            autoComplete="address"
+            id="town"
+            label="Town/City"
+            name="town"
+            autoComplete="town"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="district"
+            label="District"
+            name="district"
+            autoComplete="district"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="state"
+            label="State"
+            name="state"
+            autoComplete="state"
             autoFocus
           />
           <TextField
@@ -105,7 +148,7 @@ export default function SignUp() {
           </Button>
           <Grid container>
             <Grid item>
-              <Link to="/Profile">{"Already have an account? Log in"}</Link>
+              <Link to="/account">{"Already have an account? Log in"}</Link>
             </Grid>
           </Grid>
         </Box>

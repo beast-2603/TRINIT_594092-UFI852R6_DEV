@@ -20,8 +20,6 @@ body {
   position: fixed;
   top: 10px;
   right: 0;
-  // .nav_menu {
-  //   width: 100%;
   ul {
     display: flex;
     justify-content: center;
@@ -43,7 +41,6 @@ body {
         width: 3em;
       }
     }
-    // }
   }
 }
 
@@ -117,9 +114,14 @@ a {
     flex-basis: 50% !important;
     max-width: 100% !important;
     display: flex;
-    height: 100%;
+    height: 90vh !important;
     align-items: center;
     justify-content: center;
+    box-shadow: none;
+    background-color: #eee;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 
