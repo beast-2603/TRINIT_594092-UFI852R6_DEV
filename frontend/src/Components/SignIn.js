@@ -34,6 +34,7 @@ export default function SignIn() {
       elevation={6}
       square
       className="signin_right_form"
+      style={{ boxShadow: "none", backgroundColor: "#eee" }}
     >
       <Box
         sx={{
