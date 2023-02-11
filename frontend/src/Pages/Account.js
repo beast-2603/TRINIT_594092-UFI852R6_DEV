@@ -28,7 +28,6 @@ export default function Account() {
           }}
           className="signin_left_img"
         />
-        {/* <SignIn /> */}
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
