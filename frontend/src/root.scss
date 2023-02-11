@@ -1,20 +1,17 @@
-$blue: #d9e1cc;
 body {
-  font-family: "Questa Sans", "Trebuchet MS", "Lucida Grande",
-    "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
-
-  background-color: $blue;
-  color: #fff;
+  font-family: 'Questa Sans', 'Trebuchet MS', 'Lucida Grande',
+    'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;
   padding: 0;
   margin: 0;
 }
 .main_logo {
-  height: 20px;
-  width: 20px;
-  background-color: aqua;
   position: fixed;
   left: 20px;
   top: 20px;
+
+  .logo {
+    height: 5em;
+  }
 }
 
 .nav_container {
@@ -51,16 +48,12 @@ body {
   .home_left {
     width: 50%;
     height: 100%;
-    background: linear-gradient(#070239, #130f26, #5f2902);
-    border-radius: 0 30px 30px 0;
 
-    .home_left_bg {
+    video {
+      height: 99.4%;
+      object-fit: cover;
       width: 100%;
-      height: 100%;
-      background: url("./Images/home_bg.png");
-      background-size: cover;
-      background-repeat: no-repeat;
-      border-radius: 0 30px 30px 0;
+      border-radius: 0 0 20px 0;
     }
   }
   .home_right {
@@ -73,8 +66,27 @@ body {
     .landing_para {
       padding: 70px;
 
+      h1 {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 45px;
+        text-align: center;
+        transition: all 1s ease-out;
+      }
+
+      hr {
+        width: 0px;
+        transition: all 0.8s ease-out;
+        height: 3px;
+        background-color: #333;
+      }
+
+      h1:hover hr {
+        width: 10em;
+      }
+
       h2 {
         margin-bottom: 10px;
+        text-align: center;
       }
       p {
         color: #666;

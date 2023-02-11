@@ -1,15 +1,18 @@
 import React from 'react';
+import vid1 from '../Assests/vid1.mp4';
 
 const Home = () => {
   return (
     <div className="home_container">
       <div className="home_left">
-        {/* <div className="main_logo"></div> */}
-        <div className="home_left_bg"></div>
+        <video src={vid1} autoPlay muted loop />
       </div>
       <div className="home_right">
-        {/* <NavBar /> */}
         <div className="landing_para">
+          <h1>
+            Made for Growth
+            <hr />
+          </h1>
           <h2>Welcome</h2>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi itaque
