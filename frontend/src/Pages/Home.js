@@ -1,5 +1,5 @@
-import React from 'react';
-import vid1 from '../Assests/vid1.mp4';
+import React from "react";
+import vid1 from "../Assests/vid1.mp4";
 
 const Home = () => {
   return (
