@@ -1,5 +1,7 @@
-import React from "react";
-import vid1 from "../Assests/vid1.mp4";
+import React from 'react';
+import vid1 from '../Assests/vid1.mp4';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { NavLink } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -23,6 +25,9 @@ const Home = () => {
             laboriosam quod ex, molestiae error.
           </p>
         </div>
+        <NavLink to="/about">
+          <ArrowForwardIosIcon />
+        </NavLink>
       </div>
     </div>
   );
