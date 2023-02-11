@@ -1,13 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const NavBar = ({ currentLoc }) => {
   const LINKS = [
-    { to: '/', text: 'Home' },
-    { to: '/About', text: 'About' },
-    { to: '/Contact', text: 'Contact' },
-    { to: '/Service', text: 'Service' },
-    { to: '/Profile', text: 'Profile' }
+    { to: "/", text: "Home" },
+    { to: "/about", text: "About" },
+    { to: "/contact", text: "Contact" },
+    { to: "/service", text: "Service" },
+    { to: "/account", text: "Account" },
   ];
 
   return (
@@ -16,7 +16,7 @@ const NavBar = ({ currentLoc }) => {
         <ul>
           {LINKS.map(
             (item) =>
-              !(item.text === 'Home' && currentLoc === '/') && (
+              !(item.text === "Home" && currentLoc === "/") && (
                 <li key={item.to} className="nav_menu_item">
                   <Link to={item.to}>{item.text}</Link>
                 </li>
