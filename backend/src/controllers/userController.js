@@ -1,13 +1,16 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { generateToken } = require("../helpers/tokens");
+const { sendVerificationEmail } = require("../helpers/mailer");
+const { validateEmail } = require("../helpers/validation");
 
 const signup = async (req, res) => {
-  let { name, email, town, district, state, password, saveuser } = req.body;
+  let { name, email, town, district, state, password } = req.body;
   try {
     //encrypt the password
     password = await bcrypt.hash(password, 10);
-    const newUser = await User({
+    const user = await User({
       name,
       email,
       town,
@@ -15,28 +18,30 @@ const signup = async (req, res) => {
       state,
       password,
     });
-    await newUser.save();
-    if (saveuser) {
-      //token create
-      const token = await newUser.generateToken();
-
-      //store token in cookie
-      res.cookie("authenticated", token, {
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
-        httpOnly: true,
-      });
+    if (!validateEmail(email)) {
+      throw new Error("Invalid email address");
     }
 
+    const emailVerificationToken = generateToken(
+      { id: user._id.toString() },
+      "30m"
+    );
+
+    const url = `http://localhost:7000/activate/${emailVerificationToken}`;
+    await sendVerificationEmail(user.email, user.name, url);
+    const token = generateToken({ id: user._id.toString() }, "7d");
+
+    await user.save();
+
     //display the user details
-    console.log(newUser);
-    res.status(200).json(newUser);
+    res.status(200).json({ user, token });
   } catch (err) {
     res.status(400).json(err.message);
   }
 };
 
 const login = async (req, res) => {
-  const { email, password, saveuser } = req.body;
+  const { email, password } = req.body;
   try {
     //find the user with the perticular email if exist
     let user = await User.findOne({ email });
@@ -45,43 +50,10 @@ const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (isMatch) {
-      //check weather the token is present in cookie or not
-      const cookieToken = req.cookies.authenticated;
-
-      let matchUser = false;
-
-      if (cookieToken) {
-        const decoded = jwt.verify(cookieToken, process.env.SECRET_KEY);
-
-        //check wheather the id of the verified token is equal to the new logging in user
-        if (decoded.id === user._id.toString()) matchUser = true;
-      }
-
-      const willGenerateToken = (!cookieToken || !matchUser) && saveuser;
-
-      if (willGenerateToken) {
-        if (cookieToken) {
-          const decoded = jwt.verify(cookieToken, process.env.SECRET_KEY);
-          const oldUser = await User.findOne({ _id: decoded.id });
-
-          //deleting the token present in cookie from the database
-          oldUser.tokens = oldUser.tokens.filter(
-            (token) => token.token != cookieToken
-          );
-        }
-
-        //token create
-        const token = await user.generateToken();
-
-        //store token in cookie
-        res.cookie("authenticated", token, {
-          expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
-          httpOnly: true,
-        });
-      }
+      const token = generateToken({ id: user._id.toString() }, "7d");
 
       //display the user details
-      res.status(200).json(user);
+      res.status(200).json({ user, token });
     } else {
       throw new Error("Invalid email or password");
     }
@@ -89,27 +61,4 @@ const login = async (req, res) => {
     res.status(400).json(err.message);
   }
 };
-const logout = async (req, res) => {
-  try {
-    await res.clearCookie("authenticated");
-    req.user.tokens = req.user.tokens.filter(
-      (token) => token.token != req.token
-    );
-    await req.user.save();
-    res.status(200).json("Successfully logged out");
-  } catch (err) {
-    res.status(400).json(err.message);
-  }
-};
-const logoutOfAll = async (req, res) => {
-  try {
-    await res.clearCookie("authenticated");
-    req.user.tokens = [];
-    await req.user.save();
-    res.status(200).json("Successfully logged out");
-  } catch (err) {
-    res.status(400).json(err.message);
-  }
-};
-
-module.exports = { login, signup, logout, logoutOfAll };
+module.exports = { login, signup };
